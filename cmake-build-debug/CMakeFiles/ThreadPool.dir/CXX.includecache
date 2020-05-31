@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/zheyu/CLionProjects/ThreadPool/Task.h
+
+/Users/zheyu/CLionProjects/ThreadPool/ThreadPool.cpp
+ThreadPool.h
+/Users/zheyu/CLionProjects/ThreadPool/ThreadPool.h
+
+/Users/zheyu/CLionProjects/ThreadPool/ThreadPool.h
+iostream
+-
+pthread.h
+-
+Task.h
+/Users/zheyu/CLionProjects/ThreadPool/Task.h
+unistd.h
+-
+
+/Users/zheyu/CLionProjects/ThreadPool/main.cpp
+iostream
+-
+Task.h
+/Users/zheyu/CLionProjects/ThreadPool/Task.h
+ThreadPool.h
+/Users/zheyu/CLionProjects/ThreadPool/ThreadPool.h
+
