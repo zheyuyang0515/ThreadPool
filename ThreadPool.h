@@ -12,12 +12,20 @@
 #define ADD_THREAD_RATE 0.8         //add new threads into the pool when (the number of busy threads in the pool) / (the number of threads in the pool) >= this rate
 #define DEL_THREAD_RATE 0.3         //remove threads from the pool when(the number of busy threads in the pool) / (the number of threads in the pool) <= this rate
 class ThreadPool;
+
+/**
+ * Class Worker: the class of thread in the thread pool
+ */
 class Worker {
 private:
     pthread_t pid;
-    //Task *task_head;
 
 private:
+    /**
+     * pthread callback
+     * @param arg
+     * @return
+     */
     static void *init_worker(void * arg);
 
 public:
@@ -25,30 +33,42 @@ public:
     Worker *next;   //next pointer
 public:
     Worker(ThreadPool *pool);
+    /**
+     * constructor to initiate dummy node
+     */
     Worker() {
         prev = nullptr;
         next = nullptr;
     };
     ~Worker(){};
 };
-
+/**
+ * Class Manager: the of manager thread which could monitor and modify the number of workers in the thread pool
+ */
 class Manager {
 private:
     pthread_t pid;
 private:
+    /**
+     * pthread callback
+     * @param arg
+     * @return
+     */
     static void *init_manager(void * arg);
 public:
     Manager(ThreadPool *pool);
     ~Manager(){};
 };
-
+/**
+ * Class ThreadPool: the class of the thread pool
+ */
 class ThreadPool {
 private:
-    Manager *manager;
+    Manager *manager;       //manager thread
 
 public:
-    pthread_mutex_t lock;
-    pthread_cond_t empty_queue_cond;
+    pthread_mutex_t lock;       //mutex
+    pthread_cond_t empty_queue_cond;    //condition
     Task *tasks_head;     //task_head dummy queue
     Task *tasks_tail;        //task_tail dummy queue
     Worker *workers_head;     //worker_head dummy queue(threads)
@@ -59,18 +79,36 @@ public:
     int busy_thread_num;        //number of busy thread
 
 public:
-    //add a node to the tail of the queue
+    /**
+     * add a node to the tail of the queue
+     * @param node: the node which needs to be added into the queue
+     * @param nodes: the tail dummy node of a list
+     */
     template <class T>
     static void add_node(T *node, T *nodes);
 
-    //remove and return node from the head of the queue
+    /**
+     * remove and return node from the head of the queue
+     * @tparam T
+     * @param head: the head dummy node of a list
+     * @param tail: the tail dummy node of a list
+     * @return: the removed node
+     */
     template<class T>
     static T* remove_node(T *head, T *tail);
 
-    //add a task into the queue
+    /**
+     * add a task into the queue
+     * @param task: the task which needs to be added into the queue
+     */
     void add_task(Task *task);
 
 public:
+    /**
+     * @param min_thread_num: the minimal number of threads in the pool
+     * @param max_thread_num: the maximal number of threads int the pool
+     * @param add_step: the number of threads will be modified(add/delete) in each adjustment period
+     */
     ThreadPool(int min_thread_num, int max_thread_num, int add_step);
     ~ThreadPool();
 };

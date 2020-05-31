@@ -1,7 +1,9 @@
 #include <iostream>
 #include "Task.h"
 #include "ThreadPool.h"
-
+/**
+ * main function, print from 1 to 999 using thread pool
+ */
 #define TOTAL_TASK 1000
 void func(void *arg) {
     int count = *(int *)arg;
