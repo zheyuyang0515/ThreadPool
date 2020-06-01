@@ -7,7 +7,7 @@
 #include <glog/logging.h>
 #include <string>
 #define EXECUTABLE_NAME "ThreadPool"
-#define LOG_DIR "./logs/"
+#define LOG_DIR "../logs/"
 class Logger {
 private:
     //Logger();
@@ -15,6 +15,7 @@ private:
         this->dir = dir;
         this->executable_name = executable_name;
         std::string info_dir = dir + "info_log";
+        std::cout << info_dir << std::endl;
         google::SetLogDestination(google::GLOG_INFO, info_dir.c_str());
         std::string warning_dir = dir + "warning_log";
         google::SetLogDestination(google::GLOG_WARNING, warning_dir.c_str());
@@ -30,9 +31,9 @@ private:
 public:
     std::string dir;
     std::string executable_name;
-    static Logger& get_instance() {
+    static Logger* get_instance() {
         static Logger logger(LOG_DIR, EXECUTABLE_NAME);
-        return logger;
+        return &logger;
     }
     void logging_info(std::string content) {
         LOG(INFO) << content;

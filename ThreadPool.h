@@ -8,18 +8,17 @@
 #include <pthread.h>
 #include "Task.h"
 #include <unistd.h>
+#include "Logger.h"
 #define DEFAULT_SLEEP_TIME 10       //adjust the number of worker every this seconds
 #define ADD_THREAD_RATE 0.8         //add new threads into the pool when (the number of busy threads in the pool) / (the number of threads in the pool) >= this rate
 #define DEL_THREAD_RATE 0.3         //remove threads from the pool when(the number of busy threads in the pool) / (the number of threads in the pool) <= this rate
 class ThreadPool;
-
 /**
  * Class Worker: the class of thread in the thread pool
  */
 class Worker {
 private:
     pthread_t pid;
-
 private:
     /**
      * pthread callback
@@ -65,6 +64,7 @@ public:
 class ThreadPool {
 private:
     Manager *manager;       //manager thread
+    Logger *logger;
 
 public:
     pthread_mutex_t lock;       //mutex
