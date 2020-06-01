@@ -1,1 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/c++  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/ThreadPool.dir/main.cpp.o CMakeFiles/ThreadPool.dir/Task.cpp.o CMakeFiles/ThreadPool.dir/ThreadPool.cpp.o  -o ThreadPool 

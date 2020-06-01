@@ -1,3 +1,0 @@
-/Users/zheyu/CLionProjects/ThreadPool/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/zheyu/CLionProjects/ThreadPool/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/zheyu/CLionProjects/ThreadPool/cmake-build-debug/CMakeFiles/ThreadPool.dir
